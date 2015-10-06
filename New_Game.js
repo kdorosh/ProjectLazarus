@@ -3,7 +3,7 @@ var game = new Phaser.Game(boundsX, boundsY, Phaser.CANVAS, 'phaser-example', { 
 
 //the player
 var shep;
-//the enemy chasing shep
+//the enemy chasing ship
 var reap;
 
 var background;

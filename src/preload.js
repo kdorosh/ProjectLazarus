@@ -1,6 +1,6 @@
 var preload = function(game) {}
 
-preload.prototype= {
+preload.prototype = {
 	preload: function() {
 		//cretes a loading bar
 		var loadingBar = this.add.sprite(160, 240,"loading");

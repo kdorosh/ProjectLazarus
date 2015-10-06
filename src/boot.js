@@ -3,11 +3,11 @@ var boot = function(game){
 	console.log("%Initializing Project Lazarus", "color:")
 };
 
-boot. prototype = {
+boot.prototype = {
 	preload: function(){
 		//has the loading screen (for the title screen)
-		this.game.load.image"loading","imgs/loading.png");
-	}
+		this.game.load.image("loading","imgs/loading.png");
+	},
 	create: function(){
 		//Functions to set the size and scale of the game
 		this.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
