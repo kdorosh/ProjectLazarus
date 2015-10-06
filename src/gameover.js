@@ -1,12 +1,15 @@
 var gameOver = function(game){ }
 
 gameOver.prototype = {
+	preload: function() {
+		this.game.load.image("gameOver","imgs/gameOver.png");
+	},
 	create: function(){
 		//var gameOverTitle = (the game over screen)
-		var playButton = this.game.add.button(160,320,"play",this.play_game,this);
-		playButton.anchor.setTo(0.5, 0.5);
+		var gameOverButton = this.game.add.button(160,320,"gameOver",this.goToMainMenu,this);
+		gameOverButton.anchor.setTo(0.5, 0.5);
 	},
-	playTheGame: function(){
-		this.game.state.start("TheGame");
+	goToMainMenu: function(){
+		this.game.state.start("TitleScreen");
 	}
 }

@@ -2,13 +2,28 @@ function Normandy(game) {
 	this.game = game;
 } 
 
-Normandy.prototype.createPlayer = function() {
-  this.object = this.game.add.sprite(50, 50, 'normandy');
-  this.object.scale.setTo(0.5, 0.5);
-  this.object.anchor.setTo(0.5, 0.5);
-  game.physics.arcade.enable(this.object);
+/*Normandy.prototype.createPlayer = function() {
+	
+    this.object = this.game.add.sprite(50, 50, 'normandy');
+    this.object.scale.setTo(0.5, 0.5);
+    this.object.anchor.setTo(0.5, 0.5);
+    game.physics.arcade.enable(this.object);
+}*/
+
+Normandy.prototype = {
+	preload: function(){
+		this.game.load.image('normandy', 'imgs/normandy.png');
+	},
+	
+	createPlayer: function() {
+		this.object = this.game.add.sprite(50, 50, 'normandy');
+		this.object.scale.setTo(0.5, 0.5);
+		this.object.anchor.setTo(0.5, 0.5);
+		this.game.physics.arcade.enable(this.object);
+	}
 }
-  
+
+
 /**
 function updatePlayer() {
     var mX = game.input.mousePointer.x;
