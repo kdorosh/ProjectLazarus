@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/phaser/2.4.3/custom/phaser-arcade-physics.js"></script>
+        <script src='src/boot.js'></script>
+        <script src="src/preload.js"></script>
+        <script src="src/gametitle.js"></script>
+        <script src="src/play_game.js"></script>
+        <script src="src/gameover.js"></script>
+        	<style>
+        		body{margin:0}
+        	</style>
+        <script>
+        /*This serves as the main for the game. Adds what are called game states
+         *These are classes for different parts of the game. The titltes are pretty
+         *self explanatory. I learned/mirrored this format from this source
+         *http://www.emanueleferonato.com/2014/08/28/phaser-tutorial-understanding-phaser-states/
+         *What I have so far is the beginning of the framework for the game. What goes *in the Play_Game file will be the actual game. What we have is really basic.   * Consult me or the link for question.
+         */
+        	(function() {
+        		var boundsX = 800, boundsY = 600;
+				var game = new Phaser.Game(boundsX, boundsY, Phaser.CANVAS, 'phaser-example', { preload: preload, create: create, update: update, render: render });
+				game.state.add("Boot",boot);
+				game.state.add("PreLoad", preload);
+				game.state.add("GameTitle", gameTitle);
+				game.state.add("Play_Game", playGame);
+				game.state.start("Boot");
+			})();
+		</script>
+    </head>
+    <body>
+        <div id="game"></div>
+    </body>
+</html>
+
