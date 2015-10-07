@@ -2,14 +2,6 @@ function Normandy(game) {
 	this.game = game;
 } 
 
-/*Normandy.prototype.createPlayer = function() {
-	
-    this.object = this.game.add.sprite(50, 50, 'normandy');
-    this.object.scale.setTo(0.5, 0.5);
-    this.object.anchor.setTo(0.5, 0.5);
-    game.physics.arcade.enable(this.object);
-}*/
-
 Normandy.prototype = {
 	preload: function(){
 		this.game.load.image('normandy', 'imgs/normandy.png');
@@ -20,6 +12,32 @@ Normandy.prototype = {
 		this.object.scale.setTo(0.5, 0.5);
 		this.object.anchor.setTo(0.5, 0.5);
 		this.game.physics.arcade.enable(this.object);
+	},
+	
+	update: function(wasd) {
+		if (wasd.up.isDown) {
+			this.object.y -= 3;
+			this.object.angle = -45;
+		} else if (wasd.down.isDown) {
+			this.object.y += 3;
+			this.object.angle = 45;
+		} else {
+			this.object.angle = 0;
+		}
+		
+		if (wasd.left.isDown) {
+			this.object.x -= 3;
+		} else if (wasd.right.isDown) {
+			this.object.x += 3;
+		}
+	},
+
+	getY: function() {
+		return this.object.y;
+	},
+
+	getX: function() {
+		return this.object.x;
 	}
 }
 
