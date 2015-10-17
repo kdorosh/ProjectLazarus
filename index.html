@@ -1,30 +1,33 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/phaser/2.4.3/custom/phaser-arcade-physics.js"></script>
-        
-		<script src="src/characters/normandy.js"></script>
-		<script src="src/characters/reapers.js"></script>
+
+	<head>
+		<meta charset="utf-8" />
+		<title>Project Lazarus</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-capable" content="yes">
 		
-		<script src="src/titleScreen.js"></script>
-		<script src="src/stageBuilder.js"></script>
-		<script src="src/theGame.js"></script>
-		<script src="src/gameOver.js"></script>
+		<script src="js/normandy.js"></script>
+		<script src="js/torpedo.js"></script>
 		
-		
-		
-		<script>
-			(function() {
-				var game = new Phaser.Game(800, 600, Phaser.CANVAS, "game");
-				game.state.add("TitleScreen", titleScreen);
-				game.state.add("StageBuilder", stageBuilder);
-				game.state.add("TheGame", theGame);
-				game.state.add("GameOver", gameOver);
-				game.state.start("TitleScreen");
-			})();
-		</script>
-    </head>
-    <body>
-        <div id="game"></div>
-    </body>
+		<script type="text/javascript" src="js/phaser.2.1.2.min.js"></script>
+		<script type="text/javascript" src="js/Boot.js"></script>
+		<script type="text/javascript" src="js/Preload.js"></script>
+		<script type="text/javascript" src="js/StageSelect.js"></script>
+		<script type="text/javascript" src="js/Game.js"></script>
+		<script type="text/javascript" src="js/GameOver.js"></script>
+
+		<style>
+		  body {
+		    padding: 0px;
+		    margin: 0px;
+		  }
+		  </style>
+	</head>
+
+	<body>  
+		<!-- include the main game file -->
+		<script src="js/main.js"></script>
+	</body>
 </html>
