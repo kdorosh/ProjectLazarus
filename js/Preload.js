@@ -22,6 +22,8 @@ SideScroller.Preload.prototype = {
 	this.load.image('gameOver','assets/images/gameOver.png');
 	this.load.image('gameTiles2','assets/images/robotTile20x20.jpg');
 	this.load.image('torpedo', 'assets/images/torpedo.png');
+	this.load.image('menuText', 'assets/images/MenuText.png');
+	this.load.image('menuNebula', 'assets/images/nebula.png');
 	
     this.load.image('playerDuck', 'assets/images/player_duck.png'); // later remove
     this.load.image('playerDead', 'assets/images/player_dead.png'); // later remove

@@ -8,7 +8,7 @@ function Normandy(g) {
 	game = g;
     return game.add.sprite(300, 300, 'normandy');
 } 
-d
+
 function createPlayer(normandy) {
 		//normandy = this.game.add.sprite(100, 300, 'normandy');
 		normandy.scale.setTo(0.25, 0.25);
