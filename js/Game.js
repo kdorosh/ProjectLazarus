@@ -1,5 +1,6 @@
 var SideScroller = SideScroller || {};
-
+var camx=0;
+var camy=420;
 SideScroller.Game = function(){};
 
 SideScroller.Game.prototype = {
@@ -46,16 +47,11 @@ SideScroller.Game.prototype = {
     this.game.physics.arcade.enable(this.player);
 
     //player gravity
-    //this.player.body.gravity.y = 1000;
-
-    //properties when the player is ducked and standing, so we can use in update()
-    //var playerDuckImg = this.game.cache.getImage('playerDuck');
-    //this.player.duckedDimensions = {width: playerDuckImg.width, height: playerDuckImg.height};
-    //this.player.standDimensions = {width: this.player.width, height: this.player.height};
+    //this.player.body.gravity.y = 1000;\t
     this.player.anchor.setTo(0.5, 1);
     
     //the camera will follow the player in the world
-    this.game.camera.follow(this.player);
+    //this.game.camera.follow(this.player);
 
     //move player with cursor keys
     this.cursors = this.game.input.keyboard.createCursorKeys();
@@ -95,7 +91,10 @@ SideScroller.Game.prototype = {
       });
   },
   update: function() {
-	
+this.game.physics.arcade.overlap(this.player, this.game.camera, this.checkCameraBarrierCollision,  null, this);
+this.game.camera.setPosition(camx, camy);
+camx++;
+
 	//update playah
 	updateNormandy(this.player, wasd);
 	  
@@ -107,20 +106,7 @@ SideScroller.Game.prototype = {
     if(this.player.alive) {
       this.player.body.velocity.x = 0;  //used to be 300
 
-      if(this.cursors.up.isDown) {
-        this.playerJump();
-      }
-      else if(this.cursors.down.isDown) {
-        //this.playerDuck();
-      }
-
-      if(!this.cursors.down.isDown && this.player.isDucked && !this.pressingDown) {
-        //change image and update the body size for the physics engine
-        this.player.loadTexture('player');
-        this.player.body.setSize(this.player.standDimensions.width, this.player.standDimensions.height);
-        this.player.isDucked = false;
-      }
-
+  
       //restart the game if reaching the edge
       if(this.player.x >= this.game.world.width) {
         this.game.state.start('Game');

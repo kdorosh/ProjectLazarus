@@ -1,17 +1,17 @@
 var x;
 var y;
-var shoot=30;
+var shoot=10;
 var game;
 var torpedoes;
 
 function Normandy(g) {
 	game = g;
-    return game.add.sprite(100, 300, 'normandy');
+    return game.add.sprite(300, 300, 'normandy');
 } 
-
+d
 function createPlayer(normandy) {
 		//normandy = this.game.add.sprite(100, 300, 'normandy');
-		normandy.scale.setTo(0.5, 0.5);
+		normandy.scale.setTo(0.25, 0.25);
 		normandy.anchor.setTo(0.5, 0.5);
 		//this.game.physics.arcade.enable(normandy);
 		
@@ -21,30 +21,30 @@ function createPlayer(normandy) {
 }
 
 function updateNormandy(normandy, wasd) {
-		if(shoot<30){
+		if(shoot<10){
 			shoot++;
 		}
 		x = normandy.x;
 		y = normandy.y;
 		
 		if (wasd.up.isDown) {
-			normandy.y -= 3;
+			normandy.y -= 10;
 			normandy.angle = -45;
 		} else if (wasd.down.isDown) {
-			normandy.y += 3;
+			normandy.y += 10;
 			normandy.angle = 45;
 		} else {
 			normandy.angle = 0;
 		}
 		
 		if (wasd.left.isDown) {
-			normandy.x -= 3;
+			normandy.x -= 10;
 		} else if (wasd.right.isDown) {
-			normandy.x += 3;
+			normandy.x += 10;
 		}
 
 		if (wasd.fire.isDown) {
-			if(shoot==30){
+			if(shoot==10){
 				torpedo = new Torpedo(this.game, x, y);
 				torpedo.create();
 				torpedoes.add(torpedo.getObject());
