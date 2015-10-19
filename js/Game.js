@@ -83,6 +83,9 @@ SideScroller.Game.prototype = {
 
 	//update playah
 	updateNormandy(this.player, wasd, camVel);
+	
+	//update reapers
+	updateReapers(this.reapers, this.player);
 
     //collision
     this.game.physics.arcade.overlap(this.player, this.coins, this.collect, null, this);
@@ -136,7 +139,7 @@ SideScroller.Game.prototype = {
     this.reapers.enableBody = true;
     var result = this.findObjectsByType('reaper', this.map, 'objectsLayer');
     result.forEach(function(element){
-      this.createFromTiledObject(element, this.coins);
+      this.createFromTiledObject(element, this.reapers);
     }, this);
   },
   gameOver: function() {
