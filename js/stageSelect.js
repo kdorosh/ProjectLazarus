@@ -8,6 +8,9 @@ SideScroller.StageSelect.prototype = {
   },
   create: function() {
 	  
+	//var menuBG = this.game.add.sprite(0, 0, 'menuBG');
+	//menuBG.scale.setTo(.4, .4);
+	  
 	var menuText = this.game.add.sprite(20, 10, 'menuText');
 	menuText.scale.setTo(.5, .5);
 	var nebula = this.game.add.sprite(550, 130, 'menuNebula');

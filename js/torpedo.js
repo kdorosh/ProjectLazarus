@@ -7,7 +7,7 @@ function Torpedo(game, x, y){
 var dist = 0;
 Torpedo.prototype= {
 	create: function() {
-			this.object = this.game.add.sprite(this.x + 70, this.y + 20, 'torpedo');
+			this.object = this.game.add.sprite(this.x + 70, this.y - 10, 'torpedo');
 			this.object.scale.setTo(0.5, 0.5);
 			this.object.anchor.setTo(0.5, 0.5);
 			this.game.physics.arcade.enable(this.object);

@@ -7,7 +7,7 @@ var torpedoes;
 function Normandy(g) {
 	game = g;
     return game.add.sprite(300, 300, 'normandy');
-} 
+}
 
 function createPlayer(normandy) {
 		//normandy = this.game.add.sprite(100, 300, 'normandy');

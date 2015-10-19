@@ -1,6 +1,7 @@
 var SideScroller = SideScroller || {};
-var camx=0;
-var camy=420;
+var camx = 0;
+var camy = 420;
+var camvel = 8;
 SideScroller.Game = function(){};
 
 SideScroller.Game.prototype = {
@@ -30,18 +31,8 @@ SideScroller.Game.prototype = {
 	this.createReapers();
 
     //create player
-    //this.player = this.game.add.sprite(100, 300, 'normandy');
 	this.player = new Normandy(this.game);
-	//alert(this.player);//var temp = this.player;//alert(this.player);
 	createPlayer(this.player);
-	//alert(this.player);
-	
-	/*normandy = new Normandy(this.game);
-	alert(normandy);
-	normandy.createPlayer();
-	alert(normandy);
-	this.player = normandy;*/
-	
 	
     //enable physics on the player
     this.game.physics.arcade.enable(this.player);
@@ -91,15 +82,16 @@ SideScroller.Game.prototype = {
       });
   },
   update: function() {
-this.game.physics.arcade.overlap(this.player, this.game.camera, this.checkCameraBarrierCollision,  null, this);
-this.game.camera.setPosition(camx, camy);
-camx++;
+	  
+	this.game.physics.arcade.overlap(this.player, this.game.camera, this.checkCameraBarrierCollision,  null, this);
+	this.game.camera.setPosition(camx, camy);
+	camx = camx + camvel;
 
 	//update playah
 	updateNormandy(this.player, wasd);
 	  
     //collision
-    this.game.physics.arcade.collide(this.player, this.blockedLayer, this.playerHit, null, this);
+    this.game.physics.arcade.overlap(this.player, this.blockedLayer, this.playerHit, null, this);
     this.game.physics.arcade.overlap(this.player, this.coins, this.collect, null, this);
     
     //only respond to keys and keep the speed if the player is alive
@@ -108,7 +100,10 @@ camx++;
 
   
       //restart the game if reaching the edge
-      if(this.player.x >= this.game.world.width) {
+      if(camx >= this.game.world.width - 600) {
+		alert("Next Level!");
+		camx = 0;
+		camvel += 2;
         this.game.state.start('Game');
       }
     }
@@ -116,7 +111,7 @@ camx++;
   },
   playerHit: function(player, blockedLayer) {
     //if hits on the right side, die
-    if(player.body.blocked.right) {
+    //if(player.body.blocked.right) {
 
       //set to dead (this doesn't affect rendering)
       this.player.alive = false;
@@ -129,7 +124,7 @@ camx++;
 
       //go to gameover after a few milliseconds
       this.game.time.events.add(1500, this.gameOver, this);
-    }
+    //}
   },
   collect: function(player, collectable) {
     //play audio
@@ -157,10 +152,5 @@ camx++;
   },
   gameOver: function() {
     this.game.state.start('GameOver');
-  },
-  playerJump: function() {
-    if(this.player.body.blocked.down) {
-      this.player.body.velocity.y -= 700;
-    }    
   },
 };
