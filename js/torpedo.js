@@ -11,7 +11,7 @@ Torpedo.prototype= {
 		this.object.scale.setTo(0.5, 0.5);
 		this.object.anchor.setTo(0.5, 0.5);
 		this.game.physics.arcade.enable(this.object);
-		this.object.body.velocity.x = 3000;
+		this.object.body.velocity.x = 3000 + camVel;
 		this.object.classSrc = this;
 	},
 

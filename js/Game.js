@@ -2,7 +2,7 @@ var SideScroller = SideScroller || {};
 var camx = 0;
 var camy = 420;
 var initCamVel = 8;
-var camvel = initCamVel;
+var camVel = initCamVel;
 SideScroller.Game = function(){};
 
 SideScroller.Game.prototype = {
@@ -37,13 +37,6 @@ SideScroller.Game.prototype = {
 	
     //enable physics on the player
     this.game.physics.arcade.enable(this.player);
-
-    //player gravity
-    //this.player.body.gravity.y = 1500;
-    //this.player.anchor.setTo(0.5, 1);
-    
-    //the camera will follow the player in the world
-    //this.game.camera.follow(this.player);
 
     //move player with cursor keys
     this.cursors = this.game.input.keyboard.createCursorKeys();
@@ -86,10 +79,10 @@ SideScroller.Game.prototype = {
 	  
 	//this.game.physics.arcade.overlap(this.player, this.game.camera, this.checkCameraBarrierCollision,  null, this);
 	this.game.camera.setPosition(camx, camy);
-	camx = camx + camvel;
+	camx = camx + camVel;
 
 	//update playah
-	updateNormandy(this.player, wasd, camvel);
+	updateNormandy(this.player, wasd, camVel);
 
     //collision
     this.game.physics.arcade.overlap(this.player, this.coins, this.collect, null, this);
@@ -104,30 +97,23 @@ SideScroller.Game.prototype = {
       if(camx >= this.game.world.width - 600) {
 		//alert("Next Level!");
 		camx = 0;
-		camvel += 2;
+		camVel += 2;
         this.game.state.start('Game');
       }
     }
 
   },
   playerHit: function(player, blockedLayer) {
-    //if hits on the right side, die
-    //if(player.body.blocked.right) {
 
-      //set to dead (this doesn't affect rendering)
-      this.player.alive = false;
+    //set to dead (this doesn't affect rendering)
+    this.player.alive = false;
 
-      //stop moving to the right
-      camvel = 0;
-	  player.body.x = 300;
-	  player.body.y = 0;//this.player.body.velocity.x = 0;
+    //stop moving to the right
+    camVel = 0;
+	  
+    //go to gameover after a few milliseconds
+    this.game.time.events.add(1500, this.gameOver, this);
 
-      //change sprite image
-      //this.player.loadTexture('playerDead');
-
-      //go to gameover after a few milliseconds
-      this.game.time.events.add(1500, this.gameOver, this);
-    //}
   },
   collect: function(player, collectable) {
     //play audio
@@ -157,7 +143,7 @@ SideScroller.Game.prototype = {
     this.game.state.start('GameOver');
 	camx = 0;
 	camy = 420;
-	camvel = initCamVel;
+	camVel = initCamVel;
   },
   render: function()
   {

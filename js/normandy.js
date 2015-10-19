@@ -24,7 +24,7 @@ function createPlayer(normandy) {
 		//this.game.camera.follow(this.player);
 }
 
-function updateNormandy(normandy, wasd, camvel) {
+function updateNormandy(normandy, wasd, camVel) {
 		if(shoot<10){
 			shoot++;
 		}
@@ -42,7 +42,7 @@ function updateNormandy(normandy, wasd, camvel) {
 			} else {
 				normandy.angle = 0;
 			}		
-			normandy.body.x += camvel;
+			normandy.body.x += camVel;
 			if (wasd.left.isDown) {
 				normandy.body.x -= 10;
 			} else if (wasd.right.isDown) {

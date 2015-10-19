@@ -18,7 +18,7 @@ SideScroller.Preload.prototype = {
 	
 	this.load.image('normandy', 'assets/images/normandy.png');
 	this.load.image('play','assets/images/play.png');
-	this.load.image('gameOver','assets/images/gameOver.png');
+	this.load.image('gameOver','assets/images/gameOverMessage.png');
 	this.load.image('gameTiles2','assets/images/robotTile20x20.jpg');
 	this.load.image('torpedo', 'assets/images/torpedo.png');
 	this.load.image('menuText', 'assets/images/MenuText.png');

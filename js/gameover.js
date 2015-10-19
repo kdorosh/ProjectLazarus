@@ -7,9 +7,9 @@ SideScroller.GameOver.prototype = {
 
   },
   create: function() {
-	var gameOverButton = this.game.add.button(160,320,'gameOver',this.goToMainMenu,this);
+	var gameOverButton = this.game.add.button(360,240,'gameOver',this.goToMainMenu,this);
 	gameOverButton.anchor.setTo(0.5, 0.5);
-	gameOverButton.scale.setTo(.3, .3);
+	gameOverButton.scale.setTo(1, 1);
     
   },
   goToMainMenu: function() {
