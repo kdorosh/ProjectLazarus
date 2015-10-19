@@ -38,8 +38,8 @@ SideScroller.Game.prototype = {
     this.game.physics.arcade.enable(this.player);
 
     //player gravity
-    //this.player.body.gravity.y = 1000;\t
-    this.player.anchor.setTo(0.5, 1);
+    //this.player.body.gravity.y = 1500;
+    //this.player.anchor.setTo(0.5, 1);
     
     //the camera will follow the player in the world
     //this.game.camera.follow(this.player);
@@ -88,7 +88,7 @@ SideScroller.Game.prototype = {
 	camx = camx + camvel;
 
 	//update playah
-	updateNormandy(this.player, wasd);
+	updateNormandy(this.player, wasd, camvel);
 	  
     //collision
     this.game.physics.arcade.overlap(this.player, this.blockedLayer, this.playerHit, null, this);
@@ -101,7 +101,7 @@ SideScroller.Game.prototype = {
   
       //restart the game if reaching the edge
       if(camx >= this.game.world.width - 600) {
-		alert("Next Level!");
+		//alert("Next Level!");
 		camx = 0;
 		camvel += 2;
         this.game.state.start('Game');
@@ -153,4 +153,10 @@ SideScroller.Game.prototype = {
   gameOver: function() {
     this.game.state.start('GameOver');
   },
+  render: function()
+  {
+	//debug info: fps then body info of normandy
+	this.game.debug.text(this.game.time.fps || '--', 20, 70, "#00ff00", "40px Courier");   
+	//this.game.debug.bodyInfo(this.player, 0, 80);   
+  }
 };
