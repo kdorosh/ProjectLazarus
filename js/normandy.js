@@ -33,19 +33,20 @@ function updateNormandy(normandy, wasd, camVel) {
 		//y = normandy.body.y;
 		
 		if (normandy.alive) {
-			if (wasd.up.isDown) {
+			if (wasd.up.isDown && normandy.body.y > 30) {
 				normandy.body.y -= 10;
 				normandy.angle = -45;
-			} else if (wasd.down.isDown) {
+			} else if (wasd.down.isDown && normandy.body.y + 18 < game.world.height) {
 				normandy.body.y += 10;
 				normandy.angle = 45;
 			} else {
 				normandy.angle = 0;
 			}		
 			normandy.body.x += camVel;
-			if (wasd.left.isDown) {
+			if (wasd.left.isDown && normandy.body.x > camx + 20) {
 				normandy.body.x -= 10;
-			} else if (wasd.right.isDown) {
+			//the 746 is the width of the screen. 690 includes offset for normandy size
+			} else if (wasd.right.isDown && normandy.body.x < camx + 690) {
 				normandy.body.x += 10;
 			}
 
