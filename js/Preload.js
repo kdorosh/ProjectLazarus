@@ -26,8 +26,8 @@ SideScroller.Preload.prototype = {
 	this.load.image('menuNebula', 'assets/images/nebula.png');
 	this.load.image('menuBG', 'assets/images/menuBG.jpg');
 	
-    this.load.image('playerDuck', 'assets/images/player_duck.png'); // later remove
-    this.load.image('playerDead', 'assets/images/player_dead.png'); // later remove
+    //this.load.image('playerDuck', 'assets/images/player_duck.png'); // later remove
+    //this.load.image('playerDead', 'assets/images/player_dead.png'); // later remove
     this.load.image('goldCoin', 'assets/images/goldCoin.png');
 	this.load.image('enemy', 'assets/images/reaper.png');
     this.load.audio('coin', ['assets/audio/coin.ogg', 'assets/audio/coin.mp3']);

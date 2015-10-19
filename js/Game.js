@@ -89,9 +89,9 @@ SideScroller.Game.prototype = {
 
 	//update playah
 	updateNormandy(this.player, wasd, camvel);
-	  
+
     //collision
-    this.game.physics.arcade.overlap(this.player, this.blockedLayer, this.playerHit, null, this);
+    this.game.physics.arcade.collide(this.player.body, this.blockedLayer, this.playerHit, null, this);
     this.game.physics.arcade.overlap(this.player, this.coins, this.collect, null, this);
     
     //only respond to keys and keep the speed if the player is alive

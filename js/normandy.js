@@ -12,7 +12,7 @@ function Normandy(g) {
 function createPlayer(normandy) {
 		//normandy = this.game.add.sprite(100, 300, 'normandy');
 		normandy.scale.setTo(0.25, 0.25);
-		normandy.anchor.setTo(0.5, 0.5);
+		//normandy.anchor.setTo(0.5, 0.5);
 		//this.game.physics.arcade.enable(normandy);
 		
 		torpedoes = game.add.group();
