@@ -14,8 +14,9 @@ SideScroller.Game.prototype = {
 
     //the first parameter is the tileset name as specified in Tiled, the second is the key to the asset
     this.map.addTilesetImage('tiles_spritesheet', 'gameTiles');
-	this.map.addTilesetImage('enemies', 'reaperImg');
-	this.map.addTilesetImage('myTiles', 'gameTiles2');
+	//this.map.addTilesetImage('enemies', 'reaperImg');
+	this.map.addTilesetImage('bgTiles', 'bgTiles');
+	this.map.addTilesetImage('bgTilesFlipped', 'bgTilesFlipped');
 
     //create layers
     this.backgroundlayer = this.map.createLayer('backgroundLayer');
