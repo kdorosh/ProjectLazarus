@@ -1,7 +1,8 @@
 var SideScroller = SideScroller || {};
 var camx = 0;
 var camy = 420;
-var camvel = 8;
+var initCamVel = 8;
+var camvel = initCamVel;
 SideScroller.Game = function(){};
 
 SideScroller.Game.prototype = {
@@ -83,7 +84,7 @@ SideScroller.Game.prototype = {
   },
   update: function() {
 	  
-	this.game.physics.arcade.overlap(this.player, this.game.camera, this.checkCameraBarrierCollision,  null, this);
+	//this.game.physics.arcade.overlap(this.player, this.game.camera, this.checkCameraBarrierCollision,  null, this);
 	this.game.camera.setPosition(camx, camy);
 	camx = camx + camvel;
 
@@ -91,9 +92,9 @@ SideScroller.Game.prototype = {
 	updateNormandy(this.player, wasd, camvel);
 
     //collision
-    this.game.physics.arcade.collide(this.player.body, this.blockedLayer, this.playerHit, null, this);
     this.game.physics.arcade.overlap(this.player, this.coins, this.collect, null, this);
-    
+    this.game.physics.arcade.overlap(this.player, this.blockedLayer, this.playerHit, null, this);
+	
     //only respond to keys and keep the speed if the player is alive
     if(this.player.alive) {
       this.player.body.velocity.x = 0;  //used to be 300
@@ -117,10 +118,12 @@ SideScroller.Game.prototype = {
       this.player.alive = false;
 
       //stop moving to the right
-      this.player.body.velocity.x = 0;
+      camvel = 0;
+	  player.body.x = 300;
+	  player.body.y = 0;//this.player.body.velocity.x = 0;
 
       //change sprite image
-      this.player.loadTexture('playerDead');
+      //this.player.loadTexture('playerDead');
 
       //go to gameover after a few milliseconds
       this.game.time.events.add(1500, this.gameOver, this);
@@ -152,11 +155,14 @@ SideScroller.Game.prototype = {
   },
   gameOver: function() {
     this.game.state.start('GameOver');
+	camx = 0;
+	camy = 420;
+	camvel = initCamVel;
   },
   render: function()
   {
 	//debug info: fps then body info of normandy
 	this.game.debug.text(this.game.time.fps || '--', 20, 70, "#00ff00", "40px Courier");   
-	//this.game.debug.bodyInfo(this.player, 0, 80);   
+	this.game.debug.bodyInfo(this.player, 0, 80);   
   }
 };

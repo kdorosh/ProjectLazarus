@@ -1,5 +1,5 @@
-var x;
-var y;
+//var x;
+//var y;
 var shoot=10;
 var game;
 var torpedoes;
@@ -11,9 +11,13 @@ function Normandy(g) {
 
 function createPlayer(normandy) {
 		//normandy = this.game.add.sprite(100, 300, 'normandy');
+		normandy.alive = true;
+		game.physics.arcade.enable(normandy);
 		normandy.scale.setTo(0.25, 0.25);
-		//normandy.anchor.setTo(0.5, 0.5);
-		//this.game.physics.arcade.enable(normandy);
+		normandy.anchor.setTo(0.5, 1);
+		normandy.dimensions = {width: normandy.width, height: normandy.height};
+		normandy.body.setSize(normandy.dimensions.width, normandy.dimensions.height);
+		
 		
 		torpedoes = game.add.group();
 		
@@ -24,38 +28,40 @@ function updateNormandy(normandy, wasd, camvel) {
 		if(shoot<10){
 			shoot++;
 		}
-		x = normandy.x;
-		y = normandy.y;
+		//normandy.body.velocity.x = 0;
+		//x = normandy.body.x;
+		//y = normandy.body.y;
 		
-		if (wasd.up.isDown) {
-			normandy.y -= 10;
-			normandy.angle = -45;
-		} else if (wasd.down.isDown) {
-			normandy.y += 10;
-			normandy.angle = 45;
-		} else {
-			normandy.angle = 0;
-		}
-		
-		normandy.x += camvel;
-		if (wasd.left.isDown) {
-			normandy.x -= 10;
-		} else if (wasd.right.isDown) {
-			normandy.x += 10;
-		}
-
-		if (wasd.fire.isDown) {
-			if(shoot==10){
-				torpedo = new Torpedo(this.game, x, y);
-				torpedo.create();
-				torpedoes.add(torpedo.getObject());
-				shoot=0;
+		if (normandy.alive) {
+			if (wasd.up.isDown) {
+				normandy.body.y -= 10;
+				normandy.angle = -45;
+			} else if (wasd.down.isDown) {
+				normandy.body.y += 10;
+				normandy.angle = 45;
+			} else {
+				normandy.angle = 0;
+			}		
+			normandy.body.x += camvel;
+			if (wasd.left.isDown) {
+				normandy.body.x -= 10;
+			} else if (wasd.right.isDown) {
+				normandy.body.x += 10;
 			}
 
-    	}
-    	torpedoes.forEach(function(torpedo){
-    		torpedo.classSrc.update();
-    	}, this);
+			if (wasd.fire.isDown) {
+				if(shoot==10){
+					torpedo = new Torpedo(game, normandy.body.x, normandy.body.y);
+					torpedo.create();
+					torpedoes.add(torpedo.getObject());
+					shoot=0;
+				}
+
+			}
+			torpedoes.forEach(function(torpedo){
+				torpedo.classSrc.update();
+			}, this);
+		}
 }
 
 // OLD CODE BELOW - REMOVE LATER
