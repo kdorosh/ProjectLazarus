@@ -56,9 +56,6 @@ SideScroller.Game.prototype = {
 		right: this.game.input.keyboard.addKey(Phaser.Keyboard.D),
 		fire: this.game.input.keyboard.addKey(Phaser.Keyboard.P),
 	};
-
-    //sounds
-    // this.coinSound = this.game.add.audio('coin');
   },
   
   //find objects in a Tiled layer that contain a property called "type" equal to a certain value
