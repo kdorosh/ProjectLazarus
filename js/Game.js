@@ -4,6 +4,7 @@ var camy = 420;
 var initCamVel = 7;
 var camVel = initCamVel;
 var is_playing = false;
+var reaper_sound;
 var health = 100;
 SideScroller.Game = function(){};
 
@@ -18,7 +19,7 @@ SideScroller.Game.prototype = {
 	  this.music.play();
 	  is_playing=true;
 	}
-
+  reaper_sound= this.game.add.audio('reap');
     this.map = this.game.add.tilemap('level1');
 
     //the first parameter is the tileset name as specified in Tiled, the second is the key to the asset
@@ -139,6 +140,9 @@ SideScroller.Game.prototype = {
   },
   
   reapersDie: function(killer, reaper) {
+    reaper.animations.add('explosion');
+    reaper.animations.play('explode', 1, false, true);
+    reaper_sound.play();
     //set to dead (this doesn't affect rendering)
     reaper.alive = false;
   },
