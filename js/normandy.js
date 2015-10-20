@@ -2,7 +2,6 @@ var shoot = 10;
 var game;
 var torpedoes;
 var lazer_sound;
-var bullct=0;
 
 function Normandy(g) {
 	game = g;
@@ -51,11 +50,6 @@ function updateNormandy(normandy, wasd, camVel) {
 			}
 
 			if (wasd.fire.isDown) {
-				//bullct++;
-				//if(bullct==2){
-				//	bullct=0;
-				//}
-
 				if(shoot == 10){
 					lazer_sound.play();
 					createTorpedo(torpedoes, normandy.body.x, normandy.body.y);

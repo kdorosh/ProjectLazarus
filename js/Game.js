@@ -4,6 +4,7 @@ var camy = 420;
 var initCamVel = 7;
 var camVel = initCamVel;
 var is_playing = false;
+var health = 100;
 SideScroller.Game = function(){};
 
 SideScroller.Game.prototype = {
@@ -95,11 +96,12 @@ SideScroller.Game.prototype = {
 	updateReapers(this.reapers, this.player, camVel);
 
     //collisions
-    this.game.physics.arcade.overlap(this.player, this.blockedLayer, this.playerHit, null, this);
+  this.game.physics.arcade.overlap(this.player, this.blockedLayer, this.playerHit, null, this);
 	this.game.physics.arcade.overlap(this.player, this.reapers, this.playerHit, null, this);
+  this.game.physics.arcade.overlap(this.player, this.reapers, this.reapersDie, null, this);
 	this.game.physics.arcade.overlap(this.reapers, this.blockedLayer, this.reapersHit, null, this);
-	this.game.physics.arcade.overlap(this.reapers, this.torpedoes, this.reapersDie, null, this);
-	
+	this.game.physics.arcade.overlap(this.torpedoes, this.reapers, this.reapersDie, null, this);
+	console.log(health);
     //only respond to keys and keep the speed if the player is alive
     if(this.player.alive) {
       this.player.body.velocity.x = 0;  //used to be 300
@@ -117,13 +119,16 @@ SideScroller.Game.prototype = {
   
   playerHit: function(player, killer) {
     //set to dead (this doesn't affect rendering)
-    this.player.alive = false;
+    health -= 15;
+    if(health<0){
+        this.player.alive = false;
+        //stop moving to the right
+        camVel = 0;
+        //go to gameover after a few milliseconds
+        this.game.time.events.add(1000, this.gameOver, this);
+    }
 
-    //stop moving to the right
-    camVel = 0;
-	  
-    //go to gameover after a few milliseconds
-    this.game.time.events.add(1000, this.gameOver, this);
+
 
   },
   
@@ -133,7 +138,7 @@ SideScroller.Game.prototype = {
 	
   },
   
-  reapersDie: function(reaper, killer) {
+  reapersDie: function(killer, reaper) {
     //set to dead (this doesn't affect rendering)
     reaper.alive = false;
   },
