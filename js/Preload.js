@@ -16,6 +16,7 @@ SideScroller.Preload.prototype = {
     this.load.audio('menumusic', 'assets/audio/menu.mp3');
     this.load.audio('gamemusic', 'assets/audio/game.mp3');
     this.load.audio('gameover', 'assets/audio/lost.mp3');
+	this.load.audio('lazer', 'assets/audio/lazer.mp3');
     this.load.tilemap('level1', 'assets/tilemaps/level2.json', null, Phaser.Tilemap.TILED_JSON);//was level1
     this.load.image('gameTiles', 'assets/images/tiles_spritesheet.png');
 	this.load.image('bgTiles', 'assets/images/game_bg.jpg');
@@ -27,12 +28,9 @@ SideScroller.Preload.prototype = {
 	this.load.image('gameTiles2','assets/images/robotTile20x20.jpg');
 	this.load.image('torpedo', 'assets/images/torpedo.png');
 	this.load.image('menuText', 'assets/images/MenuText.png');
-	this.load.image('menuNebula', 'assets/images/nebula.png');
 	this.load.image('menuBG', 'assets/images/menu_bg.jpg');
 
-    this.load.image('goldCoin', 'assets/images/goldCoin.png');
 	this.load.image('reaper', 'assets/images/reaper.png');
-    this.load.audio('coin', ['assets/audio/coin.ogg', 'assets/audio/coin.mp3']);
   },
   create: function() {
     this.state.start('StageSelect');

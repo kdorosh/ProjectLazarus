@@ -20,7 +20,7 @@ function updateReapers(reapers, player, camVel) {
     reapers.forEach(function(reaper) {
 		reaper.x += camVel - 2;
 		
-		if (!reaper.alive) { //reaper.body.x < camx + 690
+		if (reaper.body.x < camx + 690 && !reaper.alive) { 
 			// respawn reaper
 			reaper.alive = true;
 			reaper.x = game.width;

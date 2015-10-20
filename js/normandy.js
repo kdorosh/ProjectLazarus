@@ -1,6 +1,7 @@
 var shoot = 10;
 var game;
 var torpedoes;
+var lazer_sound;
 
 function Normandy(g) {
 	game = g;
@@ -14,8 +15,12 @@ function createPlayer(player) {
 		player.anchor.setTo(0.5, 1);
 		player.dimensions = {width: player.width, height: player.height};
 		player.body.setSize(player.dimensions.width, player.dimensions.height);
-		
-		torpedoes = new Torpedoes(game);
+		lazer_sound = game.add.audio('lazer');
+}
+
+function createTorpedoes() {
+	torpedoes = new Torpedoes(game);
+	return torpedoes;
 }
 
 function updateNormandy(normandy, wasd, camVel) {
@@ -44,6 +49,7 @@ function updateNormandy(normandy, wasd, camVel) {
 			}
 
 			if (wasd.fire.isDown) {
+				lazer_sound.play();
 				if(shoot == 10){
 					createTorpedo(torpedoes, normandy.body.x, normandy.body.y);
 					shoot = 0;
