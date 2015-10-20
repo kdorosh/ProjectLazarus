@@ -19,7 +19,7 @@ function createReapers(reapers) {
 function updateReapers(reapers, player, camVel) {
     reapers.forEach(function(reaper) {
 		if (player.alive) {
-			reaper.body.x = reaper.body.x - camVel - 2;
+			reaper.body.x -= 2;
 			
 			if (!reaper.alive) { //reaper.body.x < camx + 690
 				// respawn reaper

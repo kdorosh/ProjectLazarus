@@ -151,7 +151,7 @@ SideScroller.Game.prototype = {
 	//debug info: fps then body info of normandy
 	this.game.debug.text(this.game.time.fps || '--', 20, 70, "#00ff00", "40px Courier");   
 	// this.game.debug.bodyInfo(this.player, 0, 80);   
-	this.torpedoes.forEach(function(torpedo) {
+	this.reapers.forEach(function(torpedo) {
 		this.game.debug.bodyInfo(torpedo, 0, 80);
 	});
   }
