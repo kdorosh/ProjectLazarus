@@ -1,5 +1,3 @@
-//var x;
-//var y;
 var shoot = 10;
 var game;
 var torpedoes;
@@ -17,7 +15,7 @@ function createPlayer(player) {
 		player.dimensions = {width: player.width, height: player.height};
 		player.body.setSize(player.dimensions.width, player.dimensions.height);
 		
-		torpedoes = game.add.group();
+		torpedoes = new Torpedoes(game);
 }
 
 function updateNormandy(normandy, wasd, camVel) {
@@ -47,15 +45,11 @@ function updateNormandy(normandy, wasd, camVel) {
 
 			if (wasd.fire.isDown) {
 				if(shoot == 10){
-					torpedo = new Torpedo(game, normandy.body.x, normandy.body.y);
-					torpedo.create();
-					torpedoes.add(torpedo.getObject());
+					torpedoes.createTorpedo(normandy.body.x, normandy.body.y, camVel);
 					shoot = 0;
 				}
 			}
 			
-			torpedoes.forEach(function(torpedo){
-				torpedo.classSrc.update();
-			}, this);
+			updateTorpedoes(torpedoes);
 		}
 }
