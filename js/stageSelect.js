@@ -1,4 +1,5 @@
 var SideScroller = SideScroller || {};
+var whichMap = 1;
 
 SideScroller.StageSelect = function(){};
 
@@ -15,13 +16,23 @@ SideScroller.StageSelect.prototype = {
 	var menuText = this.game.add.sprite(20, 10, 'menuText');
 	menuText.scale.setTo(.5, .5);
 	
-	var playButton = this.game.add.button(400, 300, 'play', this.playGame, this);
+	var playButton = this.game.add.button(400, 250, 'play', this.playGame1, this);
+	playButton.anchor.setTo(0.5,0.5);
+	playButton.scale.setTo(.3, .3);
+	
+	var playButton = this.game.add.button(400, 350, 'play', this.playGame2, this);
 	playButton.anchor.setTo(0.5,0.5);
 	playButton.scale.setTo(.3, .3);
   },
   
-  playGame: function() {
+  playGame1: function() {
+	whichMap = 1;
   	this.music.stop();
-	this.state.start('Game');
-  }
+	this.state.start('Game', whichMap);
+  },
+  playGame2: function() {
+	whichMap = 2;
+  	this.music.stop();
+	this.state.start('Game', whichMap);
+  },
 };

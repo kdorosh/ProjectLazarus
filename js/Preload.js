@@ -19,7 +19,8 @@ SideScroller.Preload.prototype = {
 	this.load.audio('lazer', 'assets/audio/lazer.mp3');
   this.load.audio('reap', 'assets/audio/reaper.mp3')
 	
-    this.load.tilemap('level1', 'assets/tilemaps/level2.json', null, Phaser.Tilemap.TILED_JSON);//was level1
+    this.load.tilemap('level1', 'assets/tilemaps/level2.json', null, Phaser.Tilemap.TILED_JSON);
+	this.load.tilemap('level2', 'assets/tilemaps/level3.json', null, Phaser.Tilemap.TILED_JSON);
     this.load.image('gameTiles', 'assets/images/tiles_spritesheet.png');
 	this.load.image('roids', 'assets/images/roid.png');
 	this.load.image('bgTiles', 'assets/images/game_bg.jpg');

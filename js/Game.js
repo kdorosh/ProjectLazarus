@@ -22,7 +22,12 @@ SideScroller.Game.prototype = {
 	  is_playing=true;
 	}
   reaper_sound= this.game.add.audio('reap');
-    this.map = this.game.add.tilemap('level1');
+	if (whichMap == 1){
+        this.map = this.game.add.tilemap('level1');
+	}
+	else {
+	    this.map = this.game.add.tilemap('level2');
+	}
 
     //the first parameter is the tileset name as specified in Tiled, the second is the key to the asset
     this.map.addTilesetImage('tiles_spritesheet', 'gameTiles');
@@ -149,10 +154,12 @@ SideScroller.Game.prototype = {
   reapersDie: function(killer, reaper) {
     //reaper.animations.add('explosion');
     //reaper.animations.play('explode', 1, false, true);
-    reaper_sound.play();
-    points+=10;
-    //set to dead (this doesn't affect rendering)
-    reaper.alive = false;
+    if(this.player.alive) {		
+		reaper_sound.play();
+		points+=10;
+		//set to dead (this doesn't affect rendering)
+		reaper.alive = false;
+	}
   },
   
   gameOver: function() {
