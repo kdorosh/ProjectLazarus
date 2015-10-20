@@ -21,7 +21,7 @@ function updateTorpedoes(torpedoes, camVel) {
 			torpedo.dist++;
 			torpedo.body.x += 20 + camVel;
 			
-			if (torpedo.dist == 20) {
+			if (torpedo.dist == 15) {
 				 torpedo.destroy();
 			}
 		}

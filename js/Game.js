@@ -10,14 +10,15 @@ SideScroller.Game = function(){};
 SideScroller.Game.prototype = {
   preload: function() {
       this.game.time.advancedTiming = true;
-    },
+  },
 	
   create: function() {
-  if(!is_playing){
-      this.music = this.game.add.audio('gamemusic');
-      this.music.play();
-    is_playing=true;
-  }
+	if(!is_playing){
+	  this.music = this.game.add.audio('gamemusic');
+	  this.music.play();
+	  is_playing=true;
+	}
+
     this.map = this.game.add.tilemap('level1');
 
     //the first parameter is the tileset name as specified in Tiled, the second is the key to the asset
@@ -41,6 +42,7 @@ SideScroller.Game.prototype = {
 	createReapers(this.reapers);
 
     //create player
+	health = 100;
 	this.player = new Normandy(this.game);
 	createPlayer(this.player);
 	this.torpedoes = createTorpedoes();
@@ -96,12 +98,12 @@ SideScroller.Game.prototype = {
 	updateReapers(this.reapers, this.player, camVel);
 
     //collisions
-  this.game.physics.arcade.overlap(this.player, this.blockedLayer, this.playerHit, null, this);
+    this.game.physics.arcade.overlap(this.player, this.blockedLayer, this.playerHit, null, this);
 	this.game.physics.arcade.overlap(this.player, this.reapers, this.playerHit, null, this);
-  this.game.physics.arcade.overlap(this.player, this.reapers, this.reapersDie, null, this);
+    this.game.physics.arcade.overlap(this.player, this.reapers, this.reapersDie, null, this);
 	this.game.physics.arcade.overlap(this.reapers, this.blockedLayer, this.reapersHit, null, this);
 	this.game.physics.arcade.overlap(this.torpedoes, this.reapers, this.reapersDie, null, this);
-	console.log(health);
+	
     //only respond to keys and keep the speed if the player is alive
     if(this.player.alive) {
       this.player.body.velocity.x = 0;  //used to be 300
@@ -120,16 +122,14 @@ SideScroller.Game.prototype = {
   playerHit: function(player, killer) {
     //set to dead (this doesn't affect rendering)
     health -= 15;
-    if(health<0){
+	
+    if(health < 0){
         this.player.alive = false;
         //stop moving to the right
         camVel = 0;
         //go to gameover after a few milliseconds
-        this.game.time.events.add(1000, this.gameOver, this);
+        this.game.time.events.add(1500, this.gameOver, this);
     }
-
-
-
   },
   
   reapersHit: function(reaper, killer) {
@@ -154,10 +154,12 @@ SideScroller.Game.prototype = {
   render: function()
   {
 	//debug info: fps then body info of normandy
-	this.game.debug.text(this.game.time.fps || '--', 20, 70, "#00ff00", "40px Courier");   
-	// this.game.debug.bodyInfo(this.player, 0, 80);   
-	this.reapers.forEach(function(torpedo) {
-		this.game.debug.bodyInfo(torpedo, 0, 80);
-	});
+	// this.game.debug.text(this.game.time.fps || '--', 20, 70, "#ff0000", "40px Courier");   
+	
+	if (health > 0) {
+		this.game.debug.text(health, 20, 70, "#00ff00", "40px Courier");
+	} else {
+		this.game.debug.text("WARNING! HULL INTEGRITY CRITICAL! EJECT!", 15, 70, "#ff0000", "30px Courier Bold");
+	}
   }
 };
