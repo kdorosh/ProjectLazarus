@@ -11,6 +11,8 @@ function createTorpedo(torpedoes, x, y) {
 	torpedo.scale.setTo(0.5, 0.5);
 	torpedo.anchor.setTo(0.5, 0.5);
 	game.physics.arcade.enable(torpedo);
+	torpedo.dimensions = {width: torpedo.width, height: torpedo.height};
+	torpedo.body.setSize(torpedo.dimensions.width, torpedo.dimensions.height);
 }
 
 function updateTorpedoes(torpedoes, camVel) {

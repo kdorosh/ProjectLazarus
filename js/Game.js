@@ -42,6 +42,7 @@ SideScroller.Game.prototype = {
     //create player
 	this.player = new Normandy(this.game);
 	createPlayer(this.player);
+	this.torpedoes = createTorpedoes();
 	
     //enable physics on the player
     this.game.physics.arcade.enable(this.player);
@@ -99,7 +100,10 @@ SideScroller.Game.prototype = {
     //collisions
     this.game.physics.arcade.overlap(this.player, this.blockedLayer, this.playerHit, null, this);
 	this.game.physics.arcade.overlap(this.player, this.reapers, this.playerHit, null, this);
-	this.game.physics.arcade.overlap(this.reapers, this.blockedLayer, this.reapersHit, null, this);
+	this.reapers.forEach(function(reaper) {
+		this.game.physics.arcade.overlap(reaper, this.blockedLayer, this.reapersHit, null, this);
+		this.game.physics.arcade.overlap(reaper, this.torpedoes, this.reapersHit, null, this);
+	});
 	
     //only respond to keys and keep the speed if the player is alive
     if(this.player.alive) {
@@ -118,17 +122,17 @@ SideScroller.Game.prototype = {
   
   playerHit: function(player, killer) {
     //set to dead (this doesn't affect rendering)
-    this.player.alive = false;
+    //this.player.alive = false;
 
     //stop moving to the right
-    camVel = 0;
+    //camVel = 0;
 	  
     //go to gameover after a few milliseconds
-    this.game.time.events.add(1000, this.gameOver, this);
+    //this.game.time.events.add(1000, this.gameOver, this);
 
   },
   
-  reapersHit: function(reaper, blockedLayer) {
+  reapersHit: function(reaper, killer) {
     //set to dead (this doesn't affect rendering)
     //reaper.alive = false;
 	//asdf
@@ -147,8 +151,8 @@ SideScroller.Game.prototype = {
 	//debug info: fps then body info of normandy
 	this.game.debug.text(this.game.time.fps || '--', 20, 70, "#00ff00", "40px Courier");   
 	// this.game.debug.bodyInfo(this.player, 0, 80);   
-	this.reapers.forEach(function(reaper) {
-		this.game.debug.bodyInfo(reaper, 0, 80);
+	this.torpedoes.forEach(function(torpedo) {
+		this.game.debug.bodyInfo(torpedo, 0, 80);
 	});
   }
 };
