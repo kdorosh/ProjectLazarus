@@ -11,7 +11,7 @@ SideScroller.StageSelect.prototype = {
 	this.music.play();  
 	var menuBG = this.game.add.sprite(0, 0, 'menuBG');
 	menuBG.scale.setTo(.8, .8);
-	  
+	
 	var menuText = this.game.add.sprite(20, 10, 'menuText');
 	menuText.scale.setTo(.5, .5);
 	

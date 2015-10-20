@@ -20,13 +20,14 @@ SideScroller.Preload.prototype = {
 	
     this.load.tilemap('level1', 'assets/tilemaps/level2.json', null, Phaser.Tilemap.TILED_JSON);//was level1
     this.load.image('gameTiles', 'assets/images/tiles_spritesheet.png');
+	this.load.image('roids', 'assets/images/roid.png');
 	this.load.image('bgTiles', 'assets/images/game_bg.jpg');
 	this.load.image('bgTilesFlipped', 'assets/images/game_bgFlipped.jpg');
 	
 	this.load.image('normandy', 'assets/images/normandy.png');
 	this.load.image('play','assets/images/play.png');
 	this.load.image('gameOver','assets/images/gameOverMessage.png');
-	this.load.image('gameTiles2','assets/images/robotTile20x20.jpg');
+	//this.load.image('gameTiles2','assets/images/robotTile20x20.jpg');
 	this.load.image('torpedo', 'assets/images/torpedo.png');
 	this.load.image('menuText', 'assets/images/MenuText.png');
 	this.load.image('menuBG', 'assets/images/menu_bg.jpg');
