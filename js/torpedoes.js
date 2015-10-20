@@ -12,9 +12,10 @@ function createTorpedo(x, y, camVel) {
 	torpedo.anchor.setTo(0.5, 0.5);
 	game.physics.arcade.enable(torpedo);
 	torpedo.velocity.x = 3000 + camVel;
+	return torpedo;
 }
 
-function updateTorpedo(torpedoes) {
+function updateTorpedoes(torpedoes) {
 	torpedoes.forEach(function(torpedo){
 		torpedo.dist++;
 		if (torpedo.dist == 10) {

@@ -45,7 +45,7 @@ function updateNormandy(normandy, wasd, camVel) {
 
 			if (wasd.fire.isDown) {
 				if(shoot == 10){
-					torpedoes.createTorpedo(normandy.body.x, normandy.body.y, camVel);
+					torpedoes.add(createTorpedo(normandy.body.x, normandy.body.y, camVel));
 					shoot = 0;
 				}
 			}
