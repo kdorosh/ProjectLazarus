@@ -7,6 +7,7 @@ var is_playing = false;
 var reaper_sound;
 var health = 100;
 var points = 0;
+var dead = false;
 SideScroller.Game = function(){};
 
 SideScroller.Game.prototype = {
@@ -44,7 +45,6 @@ SideScroller.Game.prototype = {
 	createReapers(this.reapers);
 
     //create player
-	health = 100;
 	this.player = new Normandy(this.game);
 	createPlayer(this.player);
 	this.torpedoes = createTorpedoes();
@@ -90,7 +90,6 @@ SideScroller.Game.prototype = {
   
   update: function() {  
 	//this.game.physics.arcade.overlap(this.player, this.game.camera, this.checkCameraBarrierCollision,  null, this);
-	points++;
   this.game.camera.setPosition(camx, camy);
 	camx = camx + camVel;
 
@@ -145,7 +144,7 @@ SideScroller.Game.prototype = {
     //reaper.animations.add('explosion');
     //reaper.animations.play('explode', 1, false, true);
     reaper_sound.play();
-    points+=75;
+    points+=10;
     //set to dead (this doesn't affect rendering)
     reaper.alive = false;
   },
@@ -166,7 +165,9 @@ SideScroller.Game.prototype = {
 	if (health > 0) {
 		this.game.debug.text('HP: ' + health + ' Points: ' + points, 20, 70, "#00ff00", "40px Courier");
 	} else {
-		this.game.debug.text("WARNING! HULL INTEGRITY CRITICAL! EJECT!", 15, 70, "#ff0000", "30px Courier Bold");
+    health=100;
+    points=0;
+		this.game.debug.text("WARNING! HULL INTEGRITY CRITICAL! EJECT!" + points +"points", 15, 70, "#ff0000", "30px Courier Bold");
 	}
   }
 };
