@@ -7,7 +7,7 @@ function Reapers(g) {
 
 function createReapers(reapers) {
     for (var i = 0; i < 2; i++) {
-        var reaper = reapers.create(game.width, game.rnd.integerInRange(0, (game.height / 100)) * 100, 'reaper');
+        var reaper = reapers.create(camx + game.width + 500, game.rnd.integerInRange(0, (game.height / 100)) * 100, 'reaper');
 		game.physics.arcade.enable(reaper);
 		reaper.anchor.setTo(0.5, 0.5);
 		reaper.dimensions = {width: reaper.width, height: reaper.height};
@@ -21,10 +21,10 @@ function updateReapers(reapers, player, camVel) {
 		if (player.alive) {
 			reaper.body.x -= 2;
 			
-			if (!reaper.alive) { //reaper.body.x < camx + 690
+			if (!reaper.alive || reaper.body.x < camx) {
 				// respawn reaper
 				reaper.alive = true;
-				reaper.body.x = game.width;
+				reaper.body.x = camx + game.width + 500;
 				reaper.body.y = game.rnd.integerInRange(0, (game.height / 100)) * 100;
 			}
 			
