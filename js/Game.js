@@ -134,8 +134,8 @@ SideScroller.Game.prototype = {
   
   reapersHit: function(reaper, killer) {
     //set to dead (this doesn't affect rendering)
-    reaper.alive = false;
-	asdf
+    //reaper.alive = false;
+	//asdf
   },
   
   gameOver: function() {
