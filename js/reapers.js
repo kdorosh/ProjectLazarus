@@ -6,7 +6,7 @@ function Reapers(g) {
 }
 
 function createReapers(reapers) {
-    for (var i = 0; i < 6; i++) {
+    for (var i = 0; i < 15; i++) {
         var reaper = reapers.create(camx + game.width + 500, game.rnd.integerInRange(0, (game.height / 100)) * 100, 'reaper');
 		game.physics.arcade.enable(reaper);
 		reaper.anchor.setTo(0.5, 0.5);
