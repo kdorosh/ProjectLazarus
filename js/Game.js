@@ -6,6 +6,7 @@ var camVel = initCamVel;
 var is_playing = false;
 var reaper_sound;
 var health = 100;
+var points = 0;
 SideScroller.Game = function(){};
 
 SideScroller.Game.prototype = {
@@ -89,7 +90,8 @@ SideScroller.Game.prototype = {
   
   update: function() {  
 	//this.game.physics.arcade.overlap(this.player, this.game.camera, this.checkCameraBarrierCollision,  null, this);
-	this.game.camera.setPosition(camx, camy);
+	points++;
+  this.game.camera.setPosition(camx, camy);
 	camx = camx + camVel;
 
 	//update playah
@@ -140,9 +142,10 @@ SideScroller.Game.prototype = {
   },
   
   reapersDie: function(killer, reaper) {
-    reaper.animations.add('explosion');
-    reaper.animations.play('explode', 1, false, true);
+    //reaper.animations.add('explosion');
+    //reaper.animations.play('explode', 1, false, true);
     reaper_sound.play();
+    points+=75;
     //set to dead (this doesn't affect rendering)
     reaper.alive = false;
   },
@@ -161,7 +164,7 @@ SideScroller.Game.prototype = {
 	// this.game.debug.text(this.game.time.fps || '--', 20, 70, "#ff0000", "40px Courier");   
 	
 	if (health > 0) {
-		this.game.debug.text(health, 20, 70, "#00ff00", "40px Courier");
+		this.game.debug.text('HP: ' + health + ' Points: ' + points, 20, 70, "#00ff00", "40px Courier");
 	} else {
 		this.game.debug.text("WARNING! HULL INTEGRITY CRITICAL! EJECT!", 15, 70, "#ff0000", "30px Courier Bold");
 	}
