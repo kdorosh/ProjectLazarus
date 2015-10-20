@@ -3,6 +3,7 @@ var camx = 0;
 var camy = 420;
 var initCamVel = 7;
 var camVel = initCamVel;
+var is_playing = false;
 SideScroller.Game = function(){};
 
 SideScroller.Game.prototype = {
@@ -11,6 +12,11 @@ SideScroller.Game.prototype = {
     },
 	
   create: function() {
+  if(!is_playing){
+      this.music = this.game.add.audio('gamemusic');
+      this.music.play();
+    is_playing=true;
+  }
     this.map = this.game.add.tilemap('level1');
 
     //the first parameter is the tileset name as specified in Tiled, the second is the key to the asset
@@ -129,6 +135,7 @@ SideScroller.Game.prototype = {
   },
   
   gameOver: function() {
+    this.music.stop();
     this.game.state.start('GameOver');
 	camx = 0;
 	camy = 420;
