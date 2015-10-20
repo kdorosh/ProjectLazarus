@@ -18,21 +18,23 @@ function createReapers(reapers) {
 
 function updateReapers(reapers, player, camVel) {
     reapers.forEach(function(reaper) {
-		reaper.x += camVel - 2;
-		
-		if (!reaper.alive) { //reaper.body.x < camx + 690
-			// respawn reaper
-			reaper.alive = true;
-			reaper.x = game.width;
-			reaper.y = game.rnd.integerInRange(0, (game.height / 100)) * 100;
+		if (player.alive) {
+			reaper.body.x = reaper.body.x - camVel - 2;
+			
+			if (!reaper.alive) { //reaper.body.x < camx + 690
+				// respawn reaper
+				reaper.alive = true;
+				reaper.body.x = game.width;
+				reaper.body.y = game.rnd.integerInRange(0, (game.height / 100)) * 100;
+			}
+			
+			if (reaper.body.y < player.y) {
+					reaper.body.y += 2;
+			} else if (reaper.y > player.y) {
+					reaper.body.y -= 2;
+			}
+			
+			reaper.angle = Math.atan2(player.body.x - reaper.body.x, player.body.y - reaper.body.y)  * -57.2957795;
 		}
-		
-		if (reaper.y < player.y) {
-				reaper.y += 2;
-		} else if (reaper.y > player.y) {
-				reaper.y -= 2;
-		}
-		
-		reaper.angle = Math.atan2(player.body.x - reaper.x, player.body.y - reaper.y)  * -57.2957795;
     });
 }
