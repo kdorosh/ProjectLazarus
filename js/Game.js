@@ -149,10 +149,12 @@ SideScroller.Game.prototype = {
   reapersDie: function(killer, reaper) {
     //reaper.animations.add('explosion');
     //reaper.animations.play('explode', 1, false, true);
-    reaper_sound.play();
-    points+=10;
-    //set to dead (this doesn't affect rendering)
-    reaper.alive = false;
+	if (this.player.alive) {
+		reaper_sound.play();
+		points+=10;
+		//set to dead (this doesn't affect rendering)
+		reaper.alive = false;
+	}
   },
   
   gameOver: function() {
