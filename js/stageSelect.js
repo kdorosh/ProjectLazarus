@@ -19,6 +19,13 @@ SideScroller.StageSelect.prototype = {
 	var playButton = this.game.add.button(400, 250, 'play', this.playGame1, this);
 	playButton.anchor.setTo(0.5,0.5);
 	playButton.scale.setTo(.3, .3);
+
+	var level1 = this.game.add.sprite(400, 250,'Lev1');
+	level1.scale.setTo(0.25,0.25);
+
+	var level2 = this.game.add.sprite(400, 350,'Lev2');
+	level2.scale.setTo(0.25,0.25);
+
 	
 	var playButton = this.game.add.button(400, 350, 'play', this.playGame2, this);
 	playButton.anchor.setTo(0.5,0.5);

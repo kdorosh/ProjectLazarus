@@ -34,6 +34,8 @@ SideScroller.Preload.prototype = {
 	this.load.image('torpedo', 'assets/images/torpedo.png');
 	this.load.image('menuText', 'assets/images/MenuText.png');
 	this.load.image('menuBG', 'assets/images/menu_bg.jpg');
+  this.load.image('Lev1', 'assets/images/L1TXT.png');
+  this.load.image('Lev2', 'assets/images/L2TXT.png');
 
 	this.load.image('reaper', 'assets/images/reaper.png');
   },
