@@ -7,7 +7,8 @@ SideScroller.StageSelect.prototype = {
 
   },
   create: function() {
-	  
+	this.music=this.game.add.audio('menumusic');
+	this.music.play();  
 	var menuBG = this.game.add.sprite(0, 0, 'menuBG');
 	menuBG.scale.setTo(.4, .4);
 	  
@@ -23,6 +24,7 @@ SideScroller.StageSelect.prototype = {
   },
   
   playGame: function() {
+  	this.music.stop();
 	this.state.start('Game');
   }
 };
