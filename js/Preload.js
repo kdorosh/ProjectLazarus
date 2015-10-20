@@ -13,8 +13,10 @@ SideScroller.Preload.prototype = {
     this.load.setPreloadSprite(this.preloadBar);
 
     //load game assets
-    this.load.tilemap('level1', 'assets/tilemaps/demo3.json', null, Phaser.Tilemap.TILED_JSON);//was level1
+    this.load.tilemap('level1', 'assets/tilemaps/level2.json', null, Phaser.Tilemap.TILED_JSON);//was level1
     this.load.image('gameTiles', 'assets/images/tiles_spritesheet.png');
+	this.load.image('bgTiles', 'assets/images/game_bg.jpg');
+	this.load.image('bgTilesFlipped', 'assets/images/game_bgFlipped.jpg');
 	
 	this.load.image('normandy', 'assets/images/normandy.png');
 	this.load.image('play','assets/images/play.png');
