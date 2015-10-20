@@ -131,9 +131,13 @@ SideScroller.Game.prototype = {
         camVel = 0;
         //go to gameover after a few milliseconds
         this.game.time.events.add(1500, this.gameOver, this);
-		health=100;
-		points=0;
+		this.game.time.events.add(1500, this.resetGame, this);
     }
+  },
+  
+  resetGame: function(){
+	  health=100;
+	  points=0;
   },
   
   reapersHit: function(reaper, killer) {
