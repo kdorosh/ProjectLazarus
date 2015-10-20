@@ -131,6 +131,8 @@ SideScroller.Game.prototype = {
         camVel = 0;
         //go to gameover after a few milliseconds
         this.game.time.events.add(1500, this.gameOver, this);
+		health=100;
+		points=0;
     }
   },
   
@@ -162,12 +164,10 @@ SideScroller.Game.prototype = {
 	//debug info: fps then body info of normandy
 	// this.game.debug.text(this.game.time.fps || '--', 20, 70, "#ff0000", "40px Courier");   
 	
-	if (health > 0) {
+	if (health > 0 && this.player.alive) {
 		this.game.debug.text('HP: ' + health + ' Points: ' + points, 20, 70, "#00ff00", "40px Courier");
 	} else {
-    health=100;
-    points=0;
-		this.game.debug.text("WARNING! HULL INTEGRITY CRITICAL! EJECT!" + points +"points", 15, 70, "#ff0000", "30px Courier Bold");
+		this.game.debug.text('HULL INTEGRITY CRITICAL! EJECT! Points:'+points, 15, 70, "#ff0000", "30px Courier Bold");
 	}
   }
 };
