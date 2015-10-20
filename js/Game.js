@@ -1,7 +1,7 @@
 var SideScroller = SideScroller || {};
 var camx = 0;
 var camy = 420;
-var initCamVel = 8;
+var initCamVel = 7;
 var camVel = initCamVel;
 SideScroller.Game = function(){};
 
@@ -9,6 +9,7 @@ SideScroller.Game.prototype = {
   preload: function() {
       this.game.time.advancedTiming = true;
     },
+	
   create: function() {
     this.map = this.game.add.tilemap('level1');
 
@@ -26,10 +27,10 @@ SideScroller.Game.prototype = {
 
     //resizes the game world to match the layer dimensions
     this.backgroundlayer.resizeWorld();
-
-    //create coins
-    this.createCoins();
-	this.createReapers();
+	
+	// create reapers as group
+	this.reapers = new Reapers(this.game);
+	createReapers(this.reapers);
 
     //create player
 	this.player = new Normandy(this.game);
@@ -49,10 +50,10 @@ SideScroller.Game.prototype = {
 	};
 
     //sounds
-    this.coinSound = this.game.add.audio('coin');
+    // this.coinSound = this.game.add.audio('coin');
   },
   
- //find objects in a Tiled layer that contain a property called "type" equal to a certain value
+  //find objects in a Tiled layer that contain a property called "type" equal to a certain value
   findObjectsByType: function(type, map, layerName) {
     var result = new Array();
     map.objects[layerName].forEach(function(element){
@@ -66,6 +67,7 @@ SideScroller.Game.prototype = {
     });
     return result;
   },
+  
   //create a sprite from an object
   createFromTiledObject: function(element, group) {
     var sprite = group.create(element.x, element.y, element.properties.sprite);
@@ -75,8 +77,8 @@ SideScroller.Game.prototype = {
         sprite[key] = element.properties[key];
       });
   },
-  update: function() {
-	  
+  
+  update: function() {  
 	//this.game.physics.arcade.overlap(this.player, this.game.camera, this.checkCameraBarrierCollision,  null, this);
 	this.game.camera.setPosition(camx, camy);
 	camx = camx + camVel;
@@ -85,18 +87,18 @@ SideScroller.Game.prototype = {
 	updateNormandy(this.player, wasd, camVel);
 	
 	//update reapers
-	updateReapers(this.reapers, this.player);
+	updateReapers(this.reapers, this.player, camVel);
 
-    //collision
-    this.game.physics.arcade.overlap(this.player, this.coins, this.collect, null, this);
+    //collisions
     this.game.physics.arcade.overlap(this.player, this.blockedLayer, this.playerHit, null, this);
+	this.game.physics.arcade.overlap(this.player, this.reapers, this.playerHit, null, this);
+	this.game.physics.arcade.overlap(this.reapers, this.blockedLayer, this.reapersHit, null, this);
 	
     //only respond to keys and keep the speed if the player is alive
     if(this.player.alive) {
       this.player.body.velocity.x = 0;  //used to be 300
-
   
-      //restart the game if reaching the edge
+      //restart the game if reaching the edge w/ faster scrolling speed
       if(camx >= this.game.world.width - 600) {
 		//alert("Next Level!");
 		camx = 0;
@@ -106,8 +108,8 @@ SideScroller.Game.prototype = {
     }
 
   },
-  playerHit: function(player, blockedLayer) {
-
+  
+  playerHit: function(player, killer) {
     //set to dead (this doesn't affect rendering)
     this.player.alive = false;
 
@@ -115,43 +117,30 @@ SideScroller.Game.prototype = {
     camVel = 0;
 	  
     //go to gameover after a few milliseconds
-    this.game.time.events.add(1500, this.gameOver, this);
+    this.game.time.events.add(1000, this.gameOver, this);
 
   },
-  collect: function(player, collectable) {
-    //play audio
-    this.coinSound.play();
-
-    //remove sprite
-    collectable.destroy();
+  
+  reapersHit: function(reaper, blockedLayer) {
+    //set to dead (this doesn't affect rendering)
+    reaper.alive = false;
+	asdf
   },
-  //create coins
-  createCoins: function() {
-    this.coins = this.game.add.group();
-    this.coins.enableBody = true;
-    var result = this.findObjectsByType('coin', this.map, 'objectsLayer');
-    result.forEach(function(element){
-      this.createFromTiledObject(element, this.coins);
-    }, this);
-  },
-  createReapers: function() {
-    this.reapers = this.game.add.group();
-    this.reapers.enableBody = true;
-    var result = this.findObjectsByType('reaper', this.map, 'objectsLayer');
-    result.forEach(function(element){
-      this.createFromTiledObject(element, this.reapers);
-    }, this);
-  },
+  
   gameOver: function() {
     this.game.state.start('GameOver');
 	camx = 0;
 	camy = 420;
 	camVel = initCamVel;
   },
+  
   render: function()
   {
 	//debug info: fps then body info of normandy
 	this.game.debug.text(this.game.time.fps || '--', 20, 70, "#00ff00", "40px Courier");   
-	this.game.debug.bodyInfo(this.player, 0, 80);   
+	// this.game.debug.bodyInfo(this.player, 0, 80);   
+	this.reapers.forEach(function(reaper) {
+		this.game.debug.bodyInfo(reaper, 0, 80);
+	});
   }
 };

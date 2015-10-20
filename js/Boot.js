@@ -8,6 +8,7 @@ SideScroller.Boot.prototype = {
     //assets we'll use in the loading screen
     this.load.image('preloadbar', 'assets/images/preloader-bar.png');
   },
+  
   create: function() {
     //loading screen will have a black background
     this.game.stage.backgroundColor = '#000'; //was fff (white)
